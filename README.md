@@ -1,6 +1,8 @@
 ##  Programação Radiosonda Vaisala RS41 com IDE Arduino 
 Biblioteca e IDE Arduino configurada para desenvolvimento de firmware para a Radiosonda Vaisala RS41
 
+[**Vídeo Demonstração**](https://www.youtube.com/watch?v=GGI8PdORkzQ&t=6s)
+
 #### Informações sobre o Sistema
 A IDE Arduino foi configurada no modo "portable" e foi criada uma placa "variant" com os parametros do SoC da RS41 (STM32F100C8T6).\
 A biblioteca **vaisala_rs41.h**  implementa funções para acesso ao rádio da RS41 incluindo configuração da frequência de transmissão, habilitar, desabilitar transmissão;  comunicação com o GPS , serial  (XData port) , entre outras. Veja na seção exemplos a utilização das funções.  
