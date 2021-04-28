@@ -15,6 +15,217 @@ Implementada função para transmissão de textos em RTTY.
 Para gravar o firmware é necessário ter o STlink e respectivo driver e software cliente instalado. 
 
 #### Exemplos
+Transmissão RTTY
+```cpp
+#include <SPI.h>
+#include <vaisala_rs41.h>
+
+char msg_tx_rtty[80];
+
+void setup() {
+  uint16_t leitura;   
+  rs41_config_pinos_io(); 
+  rs41_green_led (0);
+  rs41_red_led (0); 
+  
+  Serial1.begin(9600); //GPS
+  Serial3.begin(9600); 
+
+  rs41_reset_gps ();
+  
+  radio_soft_reset();
+  
+  // configura frequencia de TX  
+  radio_set_tx_frequency(403.0);
+  
+  //configura potencia de TX 
+  radio_set_tx_power(1);
+     
+  radio_config_sensor_temp();  
+  
+  radio_enable_tx(); 
+   
+  delay(1000);  
+}
+
+void loop() {         
+   sprintf(msg_tx_rtty,"Vaisala RS41 Programada com Arduino !");          
+   radio_enable_tx();
+   delay(50);  
+   rtty_txstring (msg_tx_rtty);   
+   delay(10);  
+   radio_inhibit_tx();     
+   delay(3000);       
+   
+}
+
+```
+Configuração de frequencia do rádio
+```cpp
+#include <SPI.h>
+#include <vaisala_rs41.h>
+
+void setup() {
+  uint16_t leitura;   
+  rs41_config_pinos_io(); 
+  rs41_green_led (0);
+  rs41_red_led (0); 
+  
+  Serial1.begin(9600); //GPS
+  Serial3.begin(9600); 
+
+  rs41_reset_gps ();
+  
+  radio_soft_reset();
+  
+  // configura frequencia de TX  
+  radio_set_tx_frequency(403.0);
+  
+  //configura potencia de TX 
+  radio_set_tx_power(1);
+     
+  radio_config_sensor_temp();  
+  
+  radio_enable_tx(); 
+   
+  delay(1000);  
+}
+
+void loop() {         
+   radio_set_tx_frequency(403.0);  
+   delay(2000); 
+   radio_set_tx_frequency(402.8);  
+   delay(2000); 
+   radio_set_tx_frequency(403.3);  
+   delay(2000);         
+}
+```
+Monitorar o sensor de temperatura do rádio
+```cpp
+#include <SPI.h>
+#include <vaisala_rs41.h>
+
+void setup() {
+  uint16_t leitura;   
+  rs41_config_pinos_io(); 
+  rs41_green_led (0);
+  rs41_red_led (0); 
+  
+  Serial1.begin(9600); //GPS
+  Serial3.begin(9600); 
+
+  rs41_reset_gps ();
+  
+  radio_soft_reset();
+  
+  // configura frequencia de TX  
+  radio_set_tx_frequency(403.0);
+  
+  //configura potencia de TX 
+  radio_set_tx_power(1);
+     
+  radio_config_sensor_temp();  
+  
+  radio_enable_tx(); 
+   
+  delay(1000);  
+}
+
+void loop() {     
+  Serial3.print ("temperatura: ");    
+  Serial3.println (radio_ler_temperatura());    
+}
+```
+
+Ler dados do GPS e exibir na Serial3
+```cpp
+#include <SPI.h>
+#include <vaisala_rs41.h>
+
+void setup() {
+  uint16_t leitura;   
+  rs41_config_pinos_io(); 
+  rs41_green_led (0);
+  rs41_red_led (0); 
+  
+  Serial1.begin(9600); //GPS
+  Serial3.begin(9600); 
+
+  rs41_reset_gps ();
+  
+  radio_soft_reset();
+  
+  // configura frequencia de TX  
+  radio_set_tx_frequency(403.0);
+  
+  //configura potencia de TX 
+  radio_set_tx_power(1);
+     
+  radio_config_sensor_temp();  
+  
+  radio_enable_tx(); 
+   
+  delay(1000);  
+}
+
+void loop() {     
+   while (Serial1.available() > 0)
+  {
+    Serial3.write(Serial1.read());
+  }
+
+    
+}
+```
+
+Acionamendo dos LED´s
+```cpp
+#include <SPI.h>
+#include <vaisala_rs41.h>
+
+void setup() {
+  uint16_t leitura;   
+  rs41_config_pinos_io(); 
+  rs41_green_led (0);
+  rs41_red_led (0); 
+  
+  Serial1.begin(9600); //GPS
+  Serial3.begin(9600); 
+
+  rs41_reset_gps ();
+  
+  radio_soft_reset();
+  
+  // configura frequencia de TX  
+  radio_set_tx_frequency(403.0);
+  
+  //configura potencia de TX 
+  radio_set_tx_power(1);
+     
+  radio_config_sensor_temp();  
+  
+  radio_enable_tx(); 
+   
+  delay(1000);  
+}
+
+void loop() {     
+  rs41_green_led (1);
+  rs41_red_led (0); 
+  delay (1000);
+  rs41_green_led (0);
+  rs41_red_led (1); 
+  delay(1000);
+    
+}
+```
+
+
+
+
+
+
+
 
 #### Contribuições e Agradecimentos
 - https://projetoicaro.qsl.br/ 
