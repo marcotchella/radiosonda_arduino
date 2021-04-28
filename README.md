@@ -1,6 +1,8 @@
 ##  Programação Radiosonda Vaisala RS41 com IDE Arduino 
 Biblioteca e IDE Arduino configurada para desenvolvimento de firmware para a Radiosonda Vaisala RS41
 
+[<img src="https://raw.githubusercontent.com/marcotchella/radiosonda_arduino/master/midias/000742.png">](https://www.youtube.com/watch?v=GGI8PdORkzQ&t=6s)
+
 [**Vídeo Demonstração**](https://www.youtube.com/watch?v=GGI8PdORkzQ&t=6s)
 
 #### Informações sobre o Sistema
